@@ -25,6 +25,8 @@
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/platform-socket.io": "^9.2.1",
+    "@nestjs/websockets": "^9.2.1",
     "@typegoose/typegoose": "^10.0.0",
     "mongoose": "^6.8.2",
     "nestjs-typegoose": "^7.1.38",

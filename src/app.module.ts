@@ -5,6 +5,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { getMongoConfig } from './configs/mongo.config'
 import { MessageModule } from './message/message.module'
+import { AppGateway } from './app.gateway'
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { MessageModule } from './message/message.module'
     MessageModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AppGateway],
 })
 export class AppModule {}
