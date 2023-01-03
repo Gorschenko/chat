@@ -1,0 +1,23 @@
+// primary
+$cl-primary: rgba(83, 192, 240, 1);
+$cl-primary-light: rgba(185, 229, 243, 1);
+$cl-primary-dark: rgba(81, 162, 217, 1);
+$cl-neutral: rgba(224, 232, 240, 1);
+$cl-danger: rgba(138, 20, 14, 1);
+$cl-black: black;
+$cl-light-background: white;
+$cl-yellow: rgba(255, 212, 0, 1);
+
+$border-solid: 1px solid $cl-primary-dark;
+$br-primary: 4px;
+$br-secondary: 8px;
+$bs: 2px 2px 4px 2px $cl-neutral;
+$bs-hover: 4px 4px 12px 2px $cl-neutral;
+$t-weight-accent: 500;
+$t-weight-head: 700;
+$tr-primary: 0.5s;
+$tr-secondary: 1s;
+
+$header-height: 80px;
+$sidebar-width: 150px;
+$btn-opacity: 0.9;

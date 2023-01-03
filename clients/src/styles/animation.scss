@@ -1,0 +1,10 @@
+.modal {
+  &-enter-from, &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter-from .default-modal, &-leave-to .default-modal {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}

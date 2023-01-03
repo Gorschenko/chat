@@ -1,0 +1,108 @@
+.color {
+  &_primary {
+    color: $cl-primary;
+  
+    &_light {
+      color: $cl-primary-light;
+    }
+
+    &_dark {
+      color: $cl-primary-dark;
+    }
+  }
+
+  &_neutral {
+    color: $cl-neutral;
+  }
+
+  &_danger {
+    color: $cl-danger;
+  }
+
+  &_inherit {
+    color: inherit;
+  }
+
+  &_yellow {
+    color: $cl-yellow;
+  }
+
+  &_hovered {
+    transition: $tr-primary;
+    
+    &_primary:hover {
+      color: $cl-primary;
+    }
+  
+    &_primary {
+      &_light:hover {
+        color: $cl-primary-light;
+      }
+
+      &_dark:hover {
+        color: $cl-primary-dark;
+      }
+    }
+
+    &_neutral:hover {
+      color: $cl-neutral;
+    }
+
+    &_danger:hover {
+      color: $cl-danger;
+    }
+
+    &_yellow:hover {
+      color: $cl-yellow;;
+    }
+  }
+}
+
+
+.background {
+  &_primary {
+    background: $cl-primary;
+  
+    &_light {
+      background: $cl-primary-light;
+    }
+
+    &_dark {
+      background: $cl-primary-dark;
+    }
+  }
+
+  &_neutral {
+    background: $cl-neutral;
+  }
+
+  &_danger {
+    background: $cl-danger;
+  }
+
+  &_hovered {
+    transition: $tr-primary;
+    
+    &_primary:hover {
+      background: $cl-primary;
+    }
+  
+    &_primary {
+      &_light:hover {
+        background: $cl-primary-light;
+      }
+
+      &_dark:hover {
+        background: $cl-primary-dark;
+      }
+    }
+
+    &_neutral:hover {
+      background: $cl-neutral;
+    }
+
+    &_danger:hover {
+      background: $cl-danger;
+    }
+  }
+}
