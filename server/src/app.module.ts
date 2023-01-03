@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypegooseModule } from 'nestjs-typegoose'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { getMongoConfig } from './configs/mongo.config'
 import { MessageModule } from './message/message.module'
 import { AppGateway } from './app.gateway'
@@ -17,7 +15,6 @@ import { AppGateway } from './app.gateway'
     }),
     MessageModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, AppGateway],
+  providers: [AppGateway],
 })
 export class AppModule {}

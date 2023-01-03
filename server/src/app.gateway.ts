@@ -5,7 +5,6 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets'
-import { MessageService } from './message/message.service'
 import { Server, Socket } from 'socket.io'
 
 const users: Record<string, string> = {}
@@ -18,7 +17,6 @@ const users: Record<string, string> = {}
   namespace: 'chat',
 })
 export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-  constructor(private readonly messageService: MessageService) {}
   @WebSocketServer() server: Server
 
   afterInit(server: Server): void {

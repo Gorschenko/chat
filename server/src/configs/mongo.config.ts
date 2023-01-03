@@ -26,6 +26,6 @@ const getMongoString = (configService: ConfigService): string => {
 }
 
 const getMongoOptions = (): object => ({
-  useNewUrlParses: true,
-  useUnifedTOpology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
