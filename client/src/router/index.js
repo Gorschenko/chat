@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ChatView from '../views/ChatView.vue'
+import chat from '@/router/modules/chat.modules'
 
 const routes = [
+  ...chat,
   {
     path: '/',
-    name: 'chat',
-    component: ChatView
+    name: 'main',
+    redirect: { name: 'chat' },
   },
 ]
 
