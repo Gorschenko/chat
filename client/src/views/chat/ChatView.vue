@@ -1,6 +1,6 @@
 <template>
   <div>
-    Chat
+    <router-view class="parent-size" />
   </div>
 </template>
 <script>

@@ -64,20 +64,26 @@
   width: 100%;
 }
 
+.half-parent-size-width {
+  width: 50%;
+}
+
 .flex-justify-content-end {
   justify-content: flex-end;;
 }
 
-.margin-center {
-  margin: 0 auto;
-}
+.margin {
+  &-center {
+    margin: 0 auto;
+  }
 
-.margin-right {
-  margin-left: auto;
-}
-
-.margin-left {
-  margin-right: auto;
+  &-right {
+    margin-left: auto;
+  }
+  
+  &-left {
+    margin-right: auto;
+  }
 }
 
 .mt-8 {
