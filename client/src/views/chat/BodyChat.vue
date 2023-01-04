@@ -23,7 +23,9 @@
 import MessageChat from '@/components/chat/MessageChat'
 import DefaultInput from '@/components/base/DefaultInput'
 import DefaultButton from '@/components/base/DefaultButton'
+
 import { inject } from 'vue'
+import { useNotification } from '@kyvg/vue3-notification'
 
 export default {
   name: 'BodyChat',
@@ -34,6 +36,10 @@ export default {
   },
   setup () {
     const socket = inject('socket')
+    const { notify}  = useNotification()
+    socket.on('log', text => {
+      notify({ text });
+    })
   }
 }
 </script>
@@ -47,7 +53,7 @@ export default {
     overflow-y: scroll;
     @include flex-column;
     gap: 16px;
-    padding: 0 16px;
+    padding: 24px 24px 0;
   }
 }
 </style>

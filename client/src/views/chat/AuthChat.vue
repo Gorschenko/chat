@@ -2,7 +2,7 @@
   <div class="flex-column-full-centered">
     <Form
       :validation-schema="validationSchema"
-      @submit="$emit('create', $event)"
+      @submit="submit"
       class="flex-column flex-gap-16"
     >
       <DefaultInput
@@ -30,13 +30,19 @@ export default {
     DefaultButton,
     Form,
   },
-  setup () {
+  emits: ['sign-in'],
+  setup (_, { emit }) {
     const validationSchema = Yup.object().shape({
       name: Yup.string().required(),
     })
 
+    const submit = (formData, { resetForm }) => {
+      emit('sign-in', formData)
+      resetForm()
+    }
     return {
       validationSchema,
+      submit,
     }
   }
 }

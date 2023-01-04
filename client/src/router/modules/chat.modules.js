@@ -7,7 +7,7 @@ export default [
     path: '/chat',
     name: 'chat',
     component: ChatView,
-    redirect: { name: 'body-chat' },
+    redirect: { name: 'auth-chat' },
     children: [
       {
         path: '/auth-chat',
