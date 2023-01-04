@@ -12,11 +12,9 @@ export default {
     socket.emit('msgToServer', {
       credentials: 'test'
     });
+    socket.on('msgToClient', payload => {
+      console.log(payload)
+    })
   },
-  sockets: {
-    msgToClient (response) {
-      console.log(response)
-    },
-  }
 }
 </script>
