@@ -4,6 +4,8 @@ import { TypegooseModule } from 'nestjs-typegoose'
 import { getMongoConfig } from './configs/mongo.config'
 import { MessageModule } from './message/message.module'
 import { AppGateway } from './app.gateway'
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { AppGateway } from './app.gateway'
       useFactory: getMongoConfig,
     }),
     MessageModule,
+    AuthModule,
+    UserModule,
   ],
   providers: [AppGateway],
 })

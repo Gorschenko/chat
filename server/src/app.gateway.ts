@@ -1,4 +1,6 @@
 import {
+  ConnectedSocket,
+  MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
   // OnGatewayInit,
@@ -8,8 +10,10 @@ import {
 } from '@nestjs/websockets'
 import { Server, Socket } from 'socket.io'
 
-const users: Record<string, string> = {}
-
+const users: Record<string, UserData> = {}
+interface UserData {
+  name?: string
+}
 @WebSocketGateway({
   cors: {
     origin: '*',
@@ -18,23 +22,18 @@ const users: Record<string, string> = {}
 export class AppGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server
 
-  handleConnection(client: Socket): void {
-    console.log(client)
-    const userName = client.handshake.query.userName as string
-    const socketId = client.id
-    users[socketId] = userName
-    // client.broadcast.emit('log', `${userName} connected`)
+  handleConnection(@ConnectedSocket() client: Socket): void {
+    users[client.id] = {}
   }
 
-  handleDisconnect(client: Socket): void {
-    const socketId = client.id
-    const userName = users[socketId]
-    delete users[socketId]
-    // client.broadcast.emit('log', `${userName} disconnected`)
+  handleDisconnect(@ConnectedSocket() client: Socket): void {
+    this.server.emit('log', `Пользователь ${users[client.id].name} отключен`)
+    delete users[client.id]
   }
 
-  @SubscribeMessage('msgToServer')
-  handleMessage(client: Socket, payload: string): void {
-    this.server.emit('msgToClient', payload)
+  @SubscribeMessage('joinToChat')
+  handleMessage(@MessageBody() userData: UserData, @ConnectedSocket() client: Socket): void {
+    users[client.id] = { ...userData }
+    this.server.emit('log', `Пользователь ${users[client.id].name} подключен`)
   }
 }
