@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 import { TypegooseModule } from 'nestjs-typegoose'
 import { getJWTConfig } from 'src/configs/jwt.config'
+import { JwtStrategy } from 'src/strategies/jwt.strategy'
 import { UserModel } from 'src/user/user.model'
 import { UserService } from 'src/user/user.service'
 import { AuthController } from './auth.controller'
@@ -28,6 +29,6 @@ import { AuthService } from './auth.service'
     }),
     PassportModule,
   ],
-  providers: [AuthService, UserService],
+  providers: [AuthService, UserService, JwtStrategy],
 })
 export class AuthModule {}
