@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import chat from '@/router/modules/chat.modules'
+import chat from '@/router/modules/chat.router'
+import auth from '@/router/modules/auth.router'
 
 const routes = [
+  ...auth,
   ...chat,
   {
     path: '/',
     name: 'main',
-    redirect: { name: 'chat' },
+    redirect: { name: 'sign-in' },
   },
 ]
 

@@ -18,7 +18,7 @@ export class UserService {
     const salt = await genSalt(10)
     const newUser = new this.userModel({
       email: email,
-      passwordHash: await hash(password, salt),
+      hashPassword: await hash(password, salt),
     })
     return newUser.save()
   }

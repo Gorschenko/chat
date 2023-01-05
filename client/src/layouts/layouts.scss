@@ -1,0 +1,46 @@
+.layout-default {
+  overflow: hidden;
+  max-width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas:
+  'header header'
+  'sidebar main';
+  grid-template-columns: #{$sidebar-width} 1fr;
+  grid-template-rows: #{$header-height} 1fr;
+
+  &__header {
+    grid-area: header;
+    border-bottom: $border-solid;
+  }
+
+  &__sidebar {
+    grid-area: sidebar;
+  }
+
+  &__main {
+    grid-area: main;
+    overflow: hidden;
+  }
+
+  &__section {
+    @include parent-size;
+    padding: 16px;
+    overflow-y: scroll;
+  }
+}
+
+.header-logo {
+  @include flex-v-centered;
+  gap: 4px;
+  width: #{$sidebar-width};
+
+  &__icon {
+    font-size: 48px;
+  }
+
+  &__title {
+    font-size: 32px;
+  }
+}
