@@ -14,14 +14,14 @@ export function useRoot () {
   }
 
   const setAppInfo = async () => {
-    // await store.dispatch('user/SET_USER')
-    // store.commit('SET_AUTHENTICATION', true)
-    // router.push('/')
+    await store.dispatch('user/SET_USER')
+    store.commit('auth/SET_AUTHENTICATION', true)
+    router.push({ name: 'chat' })
   }
 
   const logout = () => {
     localStorage.removeItem('token')
-    store.commit('SET_AUTHENTICATION', false)
+    store.commit('auth/SET_AUTHENTICATION', false)
     router.push({ name: 'sign-in' })
   }
 

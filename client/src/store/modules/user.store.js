@@ -1,4 +1,4 @@
-import { getUser } from '@/api/user.api/'
+import { getUser } from '@/api/users.api/'
 export default {
   namespaced: true,
   state: {

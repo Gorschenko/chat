@@ -10,8 +10,12 @@ import { UserModel } from './user.model'
 export class UserService {
   constructor(@InjectModel(UserModel) private readonly userModel: ModelType<UserModel>) {}
 
-  async findUser(email: string): Promise<DocumentType<UserModel> | null> {
-    return this.userModel.findOne({ email }).exec()
+  async findUser(email: string): Promise<DocumentType<UserModel>> {
+    const user = await this.userModel.findOne({ email }).exec()
+    if (!user) {
+      throw new UnauthorizedException(USER_NOT_FOUND_ERROR)
+    }
+    return user
   }
 
   async createUser({ email, password }: AuthDto): Promise<DocumentType<UserModel>> {
@@ -25,9 +29,6 @@ export class UserService {
 
   async validateUser({ email, password }: AuthDto): Promise<boolean> {
     const user = await this.findUser(email)
-    if (!user) {
-      throw new UnauthorizedException(USER_NOT_FOUND_ERROR)
-    }
     const isCorrectPassword = await compare(password, user.hashPassword)
     if (!isCorrectPassword) {
       throw new UnauthorizedException(USER_WRONG_PASSWORD_ERROR)

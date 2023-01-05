@@ -1,29 +1,22 @@
 <template>
-  <component
-    :is="layout"
-  />
+  <div class="parent-size">
+    <DefaultLayout />
+    <notifications />
+  </div>
 </template>
 <script>
-import LayoutDefault from '@/layouts/LayoutDefault'
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import DefaultLayout from '@/layouts/DefaultLayout'
 import { useRoot } from '@/use/root.use'
 
 export default {
   name: 'App',
   components: {
-    LayoutDefault,
+    DefaultLayout,
   },
   setup () {
-    const route = useRoute();
     const { firstFetch } = useRoot()
-    const layout = computed(() => 'layout-' + route.meta.layout)
     const init = async () => await firstFetch();
     init();
-  
-    return {
-      layout,
-    };
   },
 }
 </script>

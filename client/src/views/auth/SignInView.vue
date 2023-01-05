@@ -48,7 +48,7 @@ export default {
     const { firstFetch } = useRoot()
     const validationSchema = Yup.object().shape({
       email: Yup.string().email().required(),
-      password: Yup.string().required(),
+      password: Yup.string().min(6).required(),
     })
 
     const submit = async $event => {

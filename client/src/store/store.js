@@ -7,19 +7,6 @@ const store = createStore({
     auth,
     user,
   },
-  state: {
-    isAuthenticated: false,
-  },
-  getters: {
-    isAuthenticated (state) {
-      return state.isAuthenticated
-    }
-  },
-  mutations: {
-    SET_AUTHENTICATION (state, boolean) {
-      state.isAuthenticated = boolean
-    }
-  },
 })
 
 export default store
