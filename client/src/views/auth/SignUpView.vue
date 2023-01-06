@@ -1,5 +1,5 @@
 <template>
-  <section class="flex-row-centered">
+  <section class="flex-full-centered">
     <div class="auth-page__inner">
       <header class="mb-16">
         <h1 class="text_xl text_weight_accent">Signup</h1>

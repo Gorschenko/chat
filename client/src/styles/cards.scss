@@ -1,0 +1,9 @@
+.card {
+  box-shadow: $bs; 
+  transition: $tr-primary;
+  cursor: pointer;  
+
+  &:hover {
+    box-shadow: $bs-hover; 
+  }
+}
