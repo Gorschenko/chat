@@ -11,7 +11,4 @@ export class UserModel extends TimeStamps {
 
   @prop()
   hashPassword: string
-
-  @prop({ type: () => [String] })
-  rooms: string[]
 }

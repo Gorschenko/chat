@@ -4,8 +4,10 @@ import { TypegooseModule } from 'nestjs-typegoose'
 import { getMongoConfig } from './configs/mongo.config'
 import { MessageModule } from './message/message.module'
 import { AppGateway } from './app.gateway'
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module'
+import { UserModule } from './user/user.module'
+import { RoomController } from './room/room.controller'
+import { RoomModule } from './room/room.module'
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { UserModule } from './user/user.module';
     MessageModule,
     AuthModule,
     UserModule,
+    RoomModule,
   ],
   providers: [AppGateway],
 })
