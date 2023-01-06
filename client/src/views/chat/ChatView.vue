@@ -24,7 +24,7 @@
     >
       <i class="bx bx-message-dots color_primary icon_60" />
       <p class="text_s text_weight_accent">
-        Здесь будут комнаты
+        Комнат нет
       </p>
       <DefaultButton
         icon="bx-plus"
@@ -32,25 +32,53 @@
         color="transparent"  
         size="xs"
         :without-paddings="true"
+        @action="setModal('create-room-modal')"
       />
     </div>
+    <DefaultModal v-model="modal.show">
+      <component
+        :is="modal.component"
+        @close="modal.show = false"
+        @create="createRoomHandler"
+      />
+    </DefaultModal>
   </section>
 </template>
 <script>
 import RoomCardChat from '@/components/chat/RoomCardChat'
 import DefaultButton from '@/components/base/DefaultButton'
+import CreateRoomModal from '@/components/chat/CreateRoomModal'
+import DefaultModal from '@/components/base/DefaultModal'
+import { reactive } from 'vue'
 
 export default {
   name: 'ChatView',
   components: {
     RoomCardChat,
     DefaultButton,
+    CreateRoomModal,
+    DefaultModal
   },
   setup () {
-    const rooms = []
+    const modal = reactive({
+      show: false,
+      component: 'create-room-modal',
+    })
 
+    const setModal = componentName => {
+      modal.component = componentName
+      modal.show = true
+    }
+  
+    const rooms = []
+    const createRoomHandler = () => {
+      console.log('create new room')
+    }
     return {
       rooms,
+      modal,
+      setModal,
+      createRoomHandler,
     }
   },
 }
