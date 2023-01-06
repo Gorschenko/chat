@@ -5,8 +5,9 @@
       v-if="rooms.length"
     >
       <RoomCardChat
-        v-for="room in 5"
-        :key="room"
+        v-for="room in rooms"
+        :key="room._id"
+        :room="room"
         class="card p-16 br-secondary"
       />
       <li class="card p-16 br-secondary flex-column-full-centered">
@@ -49,7 +50,8 @@ import RoomCardChat from '@/components/chat/RoomCardChat'
 import DefaultButton from '@/components/base/DefaultButton'
 import CreateRoomModal from '@/components/chat/CreateRoomModal'
 import DefaultModal from '@/components/base/DefaultModal'
-import { reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import { getRooms } from '@/api/rooms.api'
 
 export default {
   name: 'ChatView',
@@ -69,11 +71,18 @@ export default {
       modal.component = componentName
       modal.show = true
     }
-  
-    const rooms = []
+
+    const rooms = ref([])
+
+    const init = async () => {
+      rooms.value = await getRooms()
+    }
+
+    
     const createRoomHandler = () => {
       console.log('create new room')
     }
+    onMounted(init)
     return {
       rooms,
       modal,
