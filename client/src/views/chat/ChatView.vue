@@ -16,6 +16,7 @@
           title="Создать новую"
           color="transparent"  
           size="xs"
+          @action="setModal('create-room-modal')"
         />
       </li>
     </ul>
@@ -40,7 +41,7 @@
       <component
         :is="modal.component"
         @close="modal.show = false"
-        @create="createRoomHandler"
+        @create-room="createRoomHandler"
       />
     </DefaultModal>
   </section>
@@ -78,10 +79,11 @@ export default {
       rooms.value = await getRooms()
     }
 
-    
-    const createRoomHandler = () => {
-      console.log('create new room')
+    const createRoomHandler = room => {
+      rooms.value.push(room)
+      modal.show = false
     }
+    
     onMounted(init)
     return {
       rooms,

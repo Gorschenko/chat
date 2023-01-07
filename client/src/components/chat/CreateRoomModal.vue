@@ -2,22 +2,17 @@
   <div class="create-room-modal">
     <Form
       :validation-schema="validationSchema"
-      @submit="$emit('create', $event)"
+      @submit="submit"
     >
       <DefaultInput
         class="mb-16"
-        id="title"
-        placeholder="Title"
+        id="name"
+        placeholder="Name"
       />
       <DefaultInput
         class="mb-16"
-        id="image"
-        placeholder="Image URL"
-      />
-      <DefaultInput
-        class="mb-16"
-        id="price"
-        placeholder="Price"
+        id="description"
+        placeholder="Description"
       />
       <DefaultButton
         class="margin-right"
@@ -33,6 +28,11 @@ import DefaultInput from '@/components/base/DefaultInput'
 import DefaultButton from '@/components/base/DefaultButton'
 import { Form } from 'vee-validate'
 import * as Yup from 'yup'
+import { createRoom } from '@/api/rooms.api'
+import { useNotification } from "@kyvg/vue3-notification"
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 
 export default {
   name: 'CreateRoomModal',
@@ -41,16 +41,28 @@ export default {
     DefaultButton,
     Form,
   },
-
-  setup () {
+  setup (_, { emit }) {
+    const store = useStore()
+    const user = computed (() => store.getters['user/user'])
+    const { notify}  = useNotification()
     const validationSchema = Yup.object().shape({
-      title: Yup.string().required(),
-      image: Yup.string().url().required(),
-      price: Yup.number().required(),
+      name: Yup.string().required(),
+      description: Yup.string().optional(),
     })
+
+    const submit = async values => {
+      try {
+        const newRoom = await createRoom(user.value._id, values)
+        emit('create-room', newRoom)
+        notify({ type: 'success', title: 'Успешно', text: 'Комната успешно создана'});
+      } catch (e) {
+        notify({ type: 'error', title: 'Ошибка', text: e.message});
+      }
+    }
 
     return {
       validationSchema,
+      submit,
     }
   }
 }

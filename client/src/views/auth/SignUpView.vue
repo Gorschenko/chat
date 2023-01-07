@@ -33,7 +33,7 @@ import DefaultButton from '@/components/base/DefaultButton'
 import { Form } from 'vee-validate'
 import * as Yup from 'yup'
 import { signUp } from '@/api/auth.api/'
-import { useNotification } from "@kyvg/vue3-notification";
+import { useNotification } from "@kyvg/vue3-notification"
 import { useRouter } from 'vue-router'
 
 export default {

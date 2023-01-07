@@ -6,6 +6,19 @@ const getRooms = async () => {
   )
 }
 
+const createRoom = async (userId, formData) => {
+  return await useHttp(
+    '/rooms/create',
+    'POST',
+    {
+      ownerId: userId,
+      ...formData,
+    }
+  )
+}
+
+
 export {
   getRooms,
+  createRoom,
 }
