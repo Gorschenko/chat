@@ -9,6 +9,7 @@ import {
   Delete,
   Param,
   ForbiddenException,
+  UnauthorizedException,
 } from '@nestjs/common'
 import { RoomModel } from './room.model'
 import { DocumentType } from '@typegoose/typegoose/lib/types'
@@ -19,6 +20,7 @@ import { IdValidationPipe } from 'src/pipes/add-validation.pipe'
 import { UserEmail } from 'src/decorators/user-email.decorator'
 import { UserService } from 'src/user/user.service'
 import { ROOM_NOT_REMOVED_ERROR } from './room.constants'
+import { USER_NOT_FOUND_ERROR } from 'src/user/user.constants'
 
 @Controller('rooms')
 export class RoomController {
@@ -56,6 +58,9 @@ export class RoomController {
       this.roomService.findRoomById(id),
       this.userService.findUser(email),
     ])
+    if (!user) {
+      throw new UnauthorizedException(USER_NOT_FOUND_ERROR)
+    }
     if (deletedRoom.ownerId === user._id) {
       throw new ForbiddenException(ROOM_NOT_REMOVED_ERROR)
     }

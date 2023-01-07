@@ -17,8 +17,16 @@ const createRoom = async (userId, formData) => {
   )
 }
 
+const deleteRoomById = async roomId => {
+  return await useHttp(
+    `/rooms/by-id/${roomId}`,
+    'DELETE',
+  )
+}
+
 
 export {
   getRooms,
   createRoom,
+  deleteRoomById,
 }

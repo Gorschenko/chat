@@ -11,7 +11,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  async getInfo(@UserEmail() email: string): Promise<DocumentType<UserModel>> {
-    return this.userService.findUser(email)
+  async getInfo(@UserEmail() email: string): Promise<DocumentType<UserModel> | null> {
+    return await this.userService.findUser(email)
   }
 }

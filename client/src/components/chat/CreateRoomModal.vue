@@ -41,6 +41,7 @@ export default {
     DefaultButton,
     Form,
   },
+  emits: ['create-room'],
   setup (_, { emit }) {
     const store = useStore()
     const user = computed (() => store.getters['user/user'])
