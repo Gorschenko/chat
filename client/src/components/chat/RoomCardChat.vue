@@ -23,6 +23,7 @@
         title="Войти"
         color="primary"  
         size="xs"
+        @action="goToRoom"
       />
     </div>
   </li>
@@ -30,6 +31,7 @@
 <script>
 import DefaultButton from '@/components/base/DefaultButton'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 
 export default {
@@ -44,12 +46,22 @@ export default {
       required: true,
     }
   },
-  setup() {
+  setup(props) {
     const store= useStore()
+    const router = useRouter()
     const user = computed(() => store.getters['user/user'])
 
+    const goToRoom = () => {
+      router.push({
+        name: 'chat-room',
+        params: {
+          roomId: props.room._id,
+        }
+      })
+    }
     return {
       user,
+      goToRoom,
     }
   },
 }

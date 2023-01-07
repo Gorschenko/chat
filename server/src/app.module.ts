@@ -3,11 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypegooseModule } from 'nestjs-typegoose'
 import { getMongoConfig } from './configs/mongo.config'
 import { MessageModule } from './message/message.module'
-import { AppGateway } from './app.gateway'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
-import { RoomController } from './room/room.controller'
 import { RoomModule } from './room/room.module'
+import { ChatModule } from './chat/chat.module'
 
 @Module({
   imports: [
@@ -21,7 +20,7 @@ import { RoomModule } from './room/room.module'
     AuthModule,
     UserModule,
     RoomModule,
+    ChatModule,
   ],
-  providers: [AppGateway],
 })
 export class AppModule {}

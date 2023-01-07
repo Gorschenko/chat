@@ -1,4 +1,5 @@
 import ChatView from '@/views/chat/ChatView'
+import RoomView from '@/views/chat/RoomView'
 
 export default [
   {
@@ -7,6 +8,14 @@ export default [
     component: ChatView,
     meta: {
       layout: 'default',
-    }
+    },
+  },
+  {
+    path: '/chat/room/:roomId',
+    name: 'chat-room',
+    component: RoomView,
+    meta: {
+      layout: 'default',
+    },
   }
 ]

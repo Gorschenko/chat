@@ -9,8 +9,10 @@ import Notifications from '@kyvg/vue3-notification'
 const app = createApp(App).use(router).use(store)
 
 app.use(Socketio, {
-  debug: true,
   connection: `${process.env.VUE_APP_BASE_URL}`,
+  options: {
+    autoConnect: false,
+  }
 })
 
 app.use(Notifications)
