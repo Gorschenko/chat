@@ -55,6 +55,7 @@ import CreateRoomModal from '@/components/chat/CreateRoomModal'
 import ModalConfirmation from '@/components/modals/ModalConfirmation'
 import DefaultModal from '@/components/base/DefaultModal'
 import { ref, reactive, onMounted } from 'vue'
+import { useNotification } from "@kyvg/vue3-notification";
 import { getRooms } from '@/api/rooms.api'
 import { deleteRoomById } from '@/api/rooms.api'
 
@@ -68,6 +69,8 @@ export default {
     DefaultModal
   },
   setup () {
+    const { notify}  = useNotification()
+
     const modal = reactive({
       show: false,
       component: 'create-room-modal',

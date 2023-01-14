@@ -1,5 +1,8 @@
 <template>
-  <li class="flex-column flex-gap-8">
+  <li
+    class="flex-column flex-gap-8"
+    @click.native="goToRoom"
+  >
     <div class="flex-between flex-gap-8">
       <h1 class="text_s text_weight_accent">{{ room.name }}</h1>
       <DefaultButton

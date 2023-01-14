@@ -12,6 +12,9 @@ app.use(Socketio, {
   connection: `${process.env.VUE_APP_BASE_URL}`,
   options: {
     autoConnect: false,
+    auth: {
+      token: ''
+    },
   }
 })
 
