@@ -15,6 +15,10 @@ export default class SocketService {
   }
 
   joinToRoom (roomId) {
-    this.socket.emit(constants.emiters.JOIN, { roomId })
+    this.socket.emit(constants.emiters.JOIN_TO_ROOM, { roomId })
   }
+
+  // subscribeToMessage () {
+  //   this.socket.on('send-message', message => message)
+  // }
 }

@@ -3,6 +3,7 @@
     :is="tag"
     :class="classes"
     :type="type"
+    :disabled="isDisabled"
     @click="$emit('action', $event)"
   >
     <i
@@ -50,7 +51,11 @@ export default {
     withoutPaddings: {
       type: Boolean,
       default: false,
-    }
+    },
+    isDisabled : {
+      type: Boolean,
+      default: false,
+    },
   },
   setup (props) {
     const classes = computed(() => [
@@ -74,6 +79,7 @@ export default {
 
   &:disabled {
     cursor: not-allowed;
+    opacity: $disabled-opacity;
   }
 
   i {

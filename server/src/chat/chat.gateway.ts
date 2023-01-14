@@ -31,8 +31,20 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     )
   }
 
-  @SubscribeMessage('join')
-  handleJoin(@MessageBody('roomId') roomId: number, @ConnectedSocket() client: Socket): void {
+  @SubscribeMessage('joinToRoom')
+  joinToRoom(@MessageBody('roomId') roomId: number, @ConnectedSocket() client: Socket): void {
     client.join(roomId.toString())
   }
+
+  // @SubscribeMessage('leaveRoom')
+  // leaveRoom(@MessageBody('roomId') roomId: number, @ConnectedSocket() client: Socket): void {
+  //   client.leave(roomId.toString())
+  //   client.disconnect()
+  // }
+
+  @SubscribeMessage('sendMessage')
+  sendMessage(
+    @MessageBody('message') newMessage: object,
+    @ConnectedSocket() client: Socket,
+  ): void {}
 }

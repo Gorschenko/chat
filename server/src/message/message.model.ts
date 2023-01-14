@@ -1,14 +1,15 @@
 import { prop } from '@typegoose/typegoose'
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
+import { Types } from 'mongoose'
 
 export interface MessageModel extends Base {}
 
 export class MessageModel extends TimeStamps {
   @prop()
-  userId: string
+  userId: Types.ObjectId
 
   @prop()
-  userName: string
+  roomId: Types.ObjectId
 
   @prop()
   text: string

@@ -12,13 +12,13 @@
         color="transparent"  
         icon="bx-edit-alt"
         size="xs"
-        :withoutPaddings="true"
+        :without-paddings="true"
       />
       <DefaultButton
         color="transparent"
         icon="bx-box"
         size="xs"
-        :withoutPaddings="true"
+        :without-paddings="true"
       />
     </div>
   </li>

@@ -48,11 +48,12 @@
   </div>
 </template>
 <script>
-import { toRef } from 'vue';
+import { toRef, watch } from 'vue';
 import { useField } from 'vee-validate';
 
 export default {
   name: 'DefaultInput',
+  emits: ['update:modelValue'],
   props: {
     type: {
       type: String,
@@ -92,7 +93,7 @@ export default {
       default: '',
     },
   },
-  setup (props) {
+  setup (props, { emit }) {
     const name = toRef(props, 'id');
     const {
       value: inputValue,
@@ -102,6 +103,8 @@ export default {
     } = useField(name, undefined, {
       initialValue: props.value,
     });
+
+    watch(inputValue, value => emit('update:modelValue', value))
     return {
       name,
       inputValue,

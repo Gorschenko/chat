@@ -122,5 +122,11 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '@/components/chat/chat';
+.chat-view {
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+}
 </style>
