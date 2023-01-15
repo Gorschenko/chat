@@ -8,13 +8,13 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common'
+import { Delete } from '@nestjs/common/decorators'
 import { DocumentType } from '@typegoose/typegoose'
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guards'
 import { IdValidationPipe } from 'src/pipes/add-validation.pipe'
-import { UserModel } from 'src/user/user.model'
 import { CreateMessageDto } from './dto/CreateMessageDto'
 import { MessageModel } from './message.model'
-import { MessageService } from './message.service'
+import { FoundMessagesType, MessageService } from './message.service'
 
 @UseGuards(JwtAuthGuard)
 @Controller('messages')
@@ -24,7 +24,7 @@ export class MessageController {
   @Get(':roomId')
   async findAllMessages(
     @Param('roomId', IdValidationPipe) roomId: string,
-  ): Promise<DocumentType<Omit<MessageModel, 'userId'> & { user: UserModel }>[]> {
+  ): Promise<FoundMessagesType> {
     return await this.messageService.findAllMessages(roomId)
   }
 
@@ -32,5 +32,11 @@ export class MessageController {
   @Post()
   async createMessage(@Body() dto: CreateMessageDto): Promise<DocumentType<MessageModel>> {
     return await this.messageService.createMessage(dto)
+  }
+
+  @Delete(':roomId')
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  async deleteAllMessages(@Param('roomId', IdValidationPipe) roomId: string) {
+    return await this.messageService.deleteAllMessages(roomId)
   }
 }
