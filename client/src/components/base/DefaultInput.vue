@@ -63,7 +63,7 @@ export default {
       type: [String, Number],
       required: true,
     },
-    value: {
+    modelValue: {
       type: [String, Number],
       default: '',
     },
@@ -101,7 +101,7 @@ export default {
       handleBlur,
       handleChange,
     } = useField(name, undefined, {
-      initialValue: props.value,
+      initialValue: props.modelValue,
     });
 
     watch(inputValue, value => emit('update:modelValue', value))

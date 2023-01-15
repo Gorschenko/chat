@@ -1,10 +1,10 @@
 const listeners = {
-
+  GET_MESSAGES: 'getMessages'
 }
 
 const emiters = {
   JOIN_TO_ROOM: 'joinToRoom',
-  // LEAVE: 'leaveRoom',
+  SEND_MESSAGE: 'sendMessage',
 }
 export {
   listeners,

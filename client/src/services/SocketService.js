@@ -11,14 +11,21 @@ export default class SocketService {
   }
 
   disconnect () {
+    this.socket.removeAllListeners()
     this.socket.disconnect()
   }
 
   joinToRoom (roomId) {
     this.socket.emit(constants.emiters.JOIN_TO_ROOM, { roomId })
   }
+  
+  sendMessage (message) {
+    this.socket.emit(constants.emiters.SEND_MESSAGE, { message })
+  }
 
-  // subscribeToMessage () {
-  //   this.socket.on('send-message', message => message)
-  // }
+  getMessages () {
+    this.socket.on(constants.listeners.GET_MESSAGES, message => {
+      console.log(message)
+    })
+  }
 }

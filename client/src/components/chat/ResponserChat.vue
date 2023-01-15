@@ -1,13 +1,14 @@
 <template>
   <div class="flex-v-centered flex-gap-8">
     <DefaultInput
-      id="text"
-      v-model="text"
+      id="message"
+      v-model="message"
       placeholder="Message..."
     />
     <DefaultButton
       icon="bx-envelope"
-      :is-disabled="!text"
+      :is-disabled="!message"
+      @action="sendMessage"
     />
   </div>
 </template>
@@ -22,10 +23,15 @@ export default {
     DefaultInput,
     DefaultButton,
   },
-  setup () {
-    const text = ref('')
+  setup (_, { emit }) {
+    const message = ref('')
+    const sendMessage = () => {
+      emit('send-message', message.value)
+      message.value = ''
+    }
     return {
-      text,
+      message,
+      sendMessage,
     }
   }
 }

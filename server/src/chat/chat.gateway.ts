@@ -9,12 +9,15 @@ import {
 } from '@nestjs/websockets'
 import { Logger } from '@nestjs/common'
 import { Server, Socket } from 'socket.io'
+import { CreateMessageDto } from 'src/message/dto/CreateMessageDto'
+import { MessageService } from 'src/message/message.service'
 
 @WebSocketGateway({
   cors: { origin: '*' },
   namespace: '/api',
 })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
+  constructor(private readonly messageService: MessageService) {}
   @WebSocketServer() server: Server
 
   handleConnection(@ConnectedSocket() client: Socket): void {
@@ -36,15 +39,9 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     client.join(roomId.toString())
   }
 
-  // @SubscribeMessage('leaveRoom')
-  // leaveRoom(@MessageBody('roomId') roomId: number, @ConnectedSocket() client: Socket): void {
-  //   client.leave(roomId.toString())
-  //   client.disconnect()
-  // }
-
   @SubscribeMessage('sendMessage')
-  sendMessage(
-    @MessageBody('message') newMessage: object,
-    @ConnectedSocket() client: Socket,
-  ): void {}
+  async sendMessage(@MessageBody('message') message: CreateMessageDto): Promise<void> {
+    const newMessage = await this.messageService.createMessage(message)
+    this.server.to(newMessage.roomId.toString()).emit('getMessages', newMessage)
+  }
 }
