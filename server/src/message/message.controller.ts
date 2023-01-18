@@ -9,11 +9,9 @@ import {
   ValidationPipe,
 } from '@nestjs/common'
 import { Delete } from '@nestjs/common/decorators'
-import { DocumentType } from '@typegoose/typegoose'
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guards'
 import { IdValidationPipe } from 'src/pipes/add-validation.pipe'
 import { CreateMessageDto } from './dto/CreateMessageDto'
-import { MessageModel } from './message.model'
 import { FoundMessagesType, MessageService } from './message.service'
 
 @UseGuards(JwtAuthGuard)
@@ -24,13 +22,13 @@ export class MessageController {
   @Get(':roomId')
   async findAllMessages(
     @Param('roomId', IdValidationPipe) roomId: string,
-  ): Promise<FoundMessagesType> {
+  ): Promise<FoundMessagesType[]> {
     return await this.messageService.findAllMessages(roomId)
   }
 
   @UsePipes(new ValidationPipe())
   @Post()
-  async createMessage(@Body() dto: CreateMessageDto): Promise<DocumentType<MessageModel>> {
+  async createMessage(@Body() dto: CreateMessageDto): Promise<FoundMessagesType> {
     return await this.messageService.createMessage(dto)
   }
 
