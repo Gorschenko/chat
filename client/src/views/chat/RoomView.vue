@@ -1,7 +1,12 @@
 <template>
   <section class="room-view">
-    <div class="overflow-y-scroll">
-
+    <div class="overflow-y-scroll flex-column flex-gap-8">
+      <ChatMessageCard
+        v-for="message in messages"
+        :key="message"
+        class="half-parent-size-width"
+        :message="message"
+      />
     </div>
     <ResponserChat
       class="margin-center"
@@ -19,44 +24,51 @@ import {
 } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import SocketService from '@/services/SocketService'
 import ResponserChat from '@/components/chat/ResponserChat'
+import ChatMessageCard from '@/components/chat/ChatMessageCard'
+import * as constants from '@/components/chat/chat.constants'
 
 export default {
   name: 'RoomView',
   components: {
-    ResponserChat
+    ResponserChat,
+    ChatMessageCard
   },
   setup() {
     const socket = inject('socket')
-    const socketService = new SocketService(socket)
     const route = useRoute()
     const store = useStore()
     const user = computed(() => store.getters['user/user'])
-    const messages = ref({})
+    const messages = ref([])
 
     const init = () => {
-      socketService.connect()
-      socketService.joinToRoom(route.params.roomId)
-      socketService.getMessages()
+      socket.auth.token = localStorage.getItem('token')
+      socket.connect()
+      socket.emit(constants.emiters.JOIN_TO_ROOM, { roomId: route.params.roomId })
+      socket.on(constants.listeners.GET_MESSAGES, message => {
+        messages.value.push(message)
+        console.log(message)
+      })
     }
 
     const destroy = () => {
-      socketService.disconnect()
+      socket.removeAllListeners()
+      socket.disconnect()
     }
     onBeforeMount(init)
     onUnmounted(destroy)
 
     const sendMessage = messageText => {
-      const newMessage = {
+      const message = {
         userId: user.value._id,
         roomId: route.params.roomId,
         text: messageText,
       }
-      socketService.sendMessage(newMessage)
+      socket.emit(constants.emiters.SEND_MESSAGE, { message })
     }
 
     return {
+      messages,
       sendMessage,
     }
   },
